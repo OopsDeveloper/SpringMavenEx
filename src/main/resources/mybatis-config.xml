@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <!--<typeAlias type="com.oopsdev.domain.ArticleVO" alias="ArticleVO"/>-->
-        <package name="com.oopsdev.mapper"/>
+       <typeAlias type="com.oopsdev.article.domain.ArticleVO" alias="ArticleVO"/>
+        <!--<package name="com.oopsdev.mapper"/>-->
     </typeAliases>
 </configuration>
