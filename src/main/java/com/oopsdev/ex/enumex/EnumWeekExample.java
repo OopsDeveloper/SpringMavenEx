@@ -1,4 +1,4 @@
-package com.oopsdev.ex;
+package com.oopsdev.ex.enumex;
 
 import java.util.Calendar;
 

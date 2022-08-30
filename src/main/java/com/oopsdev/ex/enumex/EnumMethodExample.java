@@ -1,4 +1,4 @@
-package com.oopsdev.ex;
+package com.oopsdev.ex.enumex;
 
 public class EnumMethodExample {
     public static void main(String[] args) {
