@@ -21,13 +21,13 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value="/write", method = RequestMethod.GET)
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
     public String writeGET() {
         logger.info("write GET...");
         return "/article/write";
     }
 
-    @RequestMapping(value="/write", method = RequestMethod.POST)
+    @RequestMapping(value = "/write", method = RequestMethod.POST)
     public String writePOST(ArticleVO articleVO, RedirectAttributes redirectAttributes) throws Exception {
         logger.info("write POST....");
         logger.info(articleVO.toString());
@@ -36,8 +36,8 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @RequestMapping(value = "list",method = RequestMethod.POST)
-    public String list(Model model) throws Exception{
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public String list(Model model) throws Exception {
         logger.info("list...");
         model.addAttribute("articles", articleService.listAll());
         return "/article/list";
@@ -48,5 +48,28 @@ public class ArticleController {
         logger.info("read...");
         model.addAttribute("article", articleService.read(articleNo));
         return "/article/read";
+    }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.GET)
+    public String modifyGET(@RequestParam("articleNo") int articleNo, Model model) throws Exception {
+        logger.info("modifyGet...");
+        model.addAttribute("article", articleService.read(articleNo));
+        return "/article/modify";
+    }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public String modifyPOST(ArticleVO articleVO, RedirectAttributes redirectAttributes) throws Exception {
+        logger.info("modifyPOST...");
+        articleService.update(articleVO);
+        redirectAttributes.addFlashAttribute("msg", "modSuccess");
+        return "redirect:/article/list";
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String remove(@RequestParam("articleNo") int articleNo, RedirectAttributes redirectAttributes) throws Exception {
+        logger.info("remove...");
+        articleService.delete(articleNo);
+        redirectAttributes.addFlashAttribute("msg", "delSuccess");
+        return "redirect:/article/list";
     }
 }
