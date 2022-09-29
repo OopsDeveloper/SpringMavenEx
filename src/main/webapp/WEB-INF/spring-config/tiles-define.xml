@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- main layout -->
+    <definition name="layout-tiles" template="/WEB-INF/views/include/tiles-layout.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/include/head.jsp" />
+        <put-attribute name="left_column" value="/WEB-INF/views/include/left_column.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="main_header" value="/WEB-INF/views/include/main_header.jsp" />
+        <put-attribute name="main_footer" value="/WEB-INF/views/include/main_footer.jsp" />
+        <put-attribute name="plugin_js" value="/WEB-INF/views/include/plugin_js.jsp" />
+    </definition>
+
+    <definition name="/*/*" extends="layout-tiles">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+        <put-attribute name="title" value="게시판ㅎㅎ" />
+    </definition>
+
+    <definition name="*" extends="layout-tiles">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+
+</tiles-definitions>

@@ -36,7 +36,7 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @RequestMapping(value = "list", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) throws Exception {
         logger.info("list...");
         model.addAttribute("articles", articleService.listAll());
