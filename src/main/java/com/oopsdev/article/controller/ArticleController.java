@@ -43,7 +43,7 @@ public class ArticleController {
         return "/article/list";
     }
 
-    @RequestMapping(value = "/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/read", method = RequestMethod.GET)
     public String read(@RequestParam("articleNo") int articleNo, Model model) throws Exception {
         logger.info("read...");
         model.addAttribute("article", articleService.read(articleNo));

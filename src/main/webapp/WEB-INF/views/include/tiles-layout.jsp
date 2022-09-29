@@ -20,6 +20,6 @@
 </div>
 <!-- ./wrapper -->
 
-<tiles:insertAttribute name="plugin_js"/>
+<%--<tiles:insertAttribute name="plugin_js"/>--%>
 
 </body>
