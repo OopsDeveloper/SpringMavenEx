@@ -60,11 +60,25 @@
 <!-- /.content-wrapper -->
 <script>
     var result = "${msg}";
-    if (result == "regSuccess") {
-        alert("게시글 등록이 완료되었습니다.");
-    } else if (result == "modSuccess") {
-        alert("게시글 수정이 완료되었습니다.");
-    } else if (result == "delSuccess") {
-        alert("게시글 삭제가 완료되었습니다.");
+
+    checkModal(result);
+
+    // 파라미터: 데이터,타이틀값,새로운 히스토리 엔트리의 URL 값
+    history.replaceState({}, null, null);
+
+    function checkModal(result) {
+        if (result === '' || history.state) {
+            return;
+        }
+        if (result == "regSuccess") {
+            alert("게시글 등록이 완료되었습니다.");
+        } else if (result == "modSuccess") {
+            alert("게시글 수정이 완료되었습니다.");
+        } else if (result == "delSuccess") {
+            alert("게시글 삭제가 완료되었습니다.");
+        }
     }
+
+
+
 </script>

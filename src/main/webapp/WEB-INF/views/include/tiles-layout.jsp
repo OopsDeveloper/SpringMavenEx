@@ -1,6 +1,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
+<html>
 <tiles:insertAttribute name="head"/>
 <body class="hold-transition skin-blue sidebar-mini layout-boxed">
 
@@ -23,3 +23,4 @@
 <%--<tiles:insertAttribute name="plugin_js"/>--%>
 
 </body>
+</html>

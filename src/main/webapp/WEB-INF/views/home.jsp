@@ -14,7 +14,7 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
-        <p>메이페이지입니다....</p>
+        <p>메인페이지입니다....</p>
 
     </section>
     <!-- /.content -->
