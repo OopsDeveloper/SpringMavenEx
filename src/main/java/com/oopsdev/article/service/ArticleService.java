@@ -1,6 +1,8 @@
 package com.oopsdev.article.service;
 
 import com.oopsdev.article.domain.ArticleVO;
+import com.oopsdev.article.persistence.ArticleDAO;
+import com.oopsdev.commons.paging.Criteria;
 
 import java.util.List;
 
@@ -15,4 +17,6 @@ public interface ArticleService {
     void delete(Integer articleNo) throws Exception;
 
     List<ArticleVO> listAll() throws Exception;
+
+    List<ArticleVO> listCriteria(Criteria criteria) throws Exception;
 }
