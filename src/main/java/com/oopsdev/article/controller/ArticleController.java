@@ -2,6 +2,7 @@ package com.oopsdev.article.controller;
 
 import com.oopsdev.article.domain.ArticleVO;
 import com.oopsdev.article.service.ArticleService;
+import com.oopsdev.commons.paging.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,13 @@ public class ArticleController {
         logger.info("list...");
         model.addAttribute("articles", articleService.listAll());
         return "/article/list";
+    }
+
+    @RequestMapping(value = "/listCriteria", method = RequestMethod.GET)
+    public String listCriteria(Model model, Criteria criteria) throws Exception {
+        logger.info("listCriteria...");
+        model.addAttribute("articles", articleService.listCriteria(criteria));
+        return "/article/list_criteria";
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
