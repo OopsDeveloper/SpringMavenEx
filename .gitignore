@@ -1,3 +1,26 @@
 # Project exclude paths
 /target/
 /SpringMavenEx.iml
+*.class
+*.ctxt
+.project
+.classpath
+.settings/
+/bin/
+.svn
+out/
+
+.idea
+**/jpa-buddy.xml
+**/build/**
+/http/
+*.log
+
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
