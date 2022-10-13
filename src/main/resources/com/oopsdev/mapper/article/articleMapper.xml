@@ -74,4 +74,13 @@
         LIMIT #{pageStart},#{perPageNum}
         ]]>
     </select>
+
+    <select id="countArticles" resultType="int">
+        <![CDATA[
+            SELECT
+                COUNT(article_no)
+            FROM oopsdev.tbl_article
+            WHERE article_no > 0
+        ]]>
+    </select>
 </mapper>
