@@ -12,7 +12,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><i class="fa fa-edit"></i> article</li>
-            <li class="active"><a href="${path}/article/paging/read"> read</a></li>
+            <li class="active"><a href="${path}/article/paging/search/read"> read</a></li>
         </ol>
     </section>
 
@@ -39,8 +39,10 @@
                 <div class="box-footer">
                     <form role="form" method="post">
                         <input type="hidden" name="articleNo" value="${article.articleNo}">
-                        <input type="hidden" name="page" value="${criteria.page}">
-                        <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+                        <input type="hidden" name="page" value="${searchCriteria.page}">
+                        <input type="hidden" name="perPageNum" value="${searchCriteria.perPageNum}">
+                        <input type="hidden" name="searchType" value="${searchCriteria.searchType}">
+                        <input type="hidden" name="keyword" value="${searchCriteria.keyword}">
                     </form>
                     <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
                     <div class="pull-right">
@@ -61,18 +63,18 @@
         console.log(formObj);
 
         $(".modBtn").on("click", function () {
-            formObj.attr("action", "/article/paging/modify");
+            formObj.attr("action", "/article/paging/search/modify");
             formObj.attr("method", "get");
             formObj.submit();
         });
 
         $(".delBtn").on("click", function () {
-            formObj.attr("action", "/article/paging/remove");
+            formObj.attr("action", "/article/paging/search/remove");
             formObj.submit();
         });
 
         $(".listBtn").on("click", function () {
-            self.location = "/article/paging/list"
+            self.location = "/article/paging/search/list"
         });
     });
 </script>

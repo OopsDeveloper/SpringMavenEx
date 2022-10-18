@@ -3,6 +3,7 @@ package com.oopsdev.article.service;
 import com.oopsdev.article.domain.ArticleVO;
 import com.oopsdev.article.persistence.ArticleDAO;
 import com.oopsdev.commons.paging.Criteria;
+import com.oopsdev.commons.paging.SearchCriteria;
 
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface ArticleService {
     List<ArticleVO> listCriteria(Criteria criteria) throws Exception;
 
     int countArticles(Criteria criteria) throws Exception;
+
+    List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception;
+
+    int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
 }

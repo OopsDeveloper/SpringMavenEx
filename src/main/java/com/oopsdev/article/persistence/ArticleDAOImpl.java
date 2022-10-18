@@ -2,6 +2,7 @@ package com.oopsdev.article.persistence;
 
 import com.oopsdev.article.domain.ArticleVO;
 import com.oopsdev.commons.paging.Criteria;
+import com.oopsdev.commons.paging.SearchCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,4 +60,15 @@ public class ArticleDAOImpl implements ArticleDAO{
     public int countArticles(Criteria criteria) throws Exception {
         return sqlSession.selectOne(NAMESPACE + ".countArticles", criteria);
     }
+
+    @Override
+    public List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception {
+        return sqlSession.selectList(NAMESPACE + ".listSearch", searchCriteria);
+    }
+
+    @Override
+    public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
+        return sqlSession.selectOne(NAMESPACE + ".countSearchedArticles", searchCriteria);
+    }
+
 }

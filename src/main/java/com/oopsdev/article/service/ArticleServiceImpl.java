@@ -3,6 +3,7 @@ package com.oopsdev.article.service;
 import com.oopsdev.article.domain.ArticleVO;
 import com.oopsdev.article.persistence.ArticleDAO;
 import com.oopsdev.commons.paging.Criteria;
+import com.oopsdev.commons.paging.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,15 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public int countArticles(Criteria criteria) throws Exception {
         return articleDAO.countArticles(criteria);
+    }
+
+    @Override
+    public List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception {
+        return articleDAO.listSearch(searchCriteria);
+    }
+
+    @Override
+    public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
+        return articleDAO.countSearchedArticles(searchCriteria);
     }
 }

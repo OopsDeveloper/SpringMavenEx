@@ -12,7 +12,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><i class="fa fa-edit"></i> article</li>
-            <li class="active"><a href="${path}/article/paging/write"> write</a></li>
+            <li class="active"><a href="${path}/article/paging/search/write"> write</a></li>
         </ol>
     </section>
 
@@ -20,7 +20,7 @@
     <section class="content container-fluid">
 
         <div class="col-lg-12">
-            <form role="form" id="writeForm" method="post" action="${path}/article/paging/write">
+            <form role="form" id="writeForm" method="post" action="${path}/article/paging/search/write">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">게시글 작성</h3>
@@ -55,8 +55,9 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
 <script>
     $(".listBtn").on("click", function () {
-        self.location = "/article/paging/list";
+        self.location = "/article/paging/search/list";
     });
 </script>
