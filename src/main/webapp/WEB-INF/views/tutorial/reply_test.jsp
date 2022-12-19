@@ -85,18 +85,14 @@
 </div>
 <!-- /.content-wrapper -->
 <script>
+    var replyPageNum = 1;
     var articleNo = 1000;
-
-    // 댓글 목록 호출
-    getReplies();
-
-    // 댓글 목록 출력 함수
+    //getReplies();
+    getRepliesPaging(replyPageNum);
     function getReplies() {
         $.getJSON("/replies/all/" + articleNo, function (data) {
             console.log(data);
-
             var str = "";
-
             $(data).each(function () {
                 str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
                     +   "<p class='replyText'>" + this.replyText + "</p>"
@@ -108,50 +104,45 @@
             $("#replies").html(str);
         });
     }
-
     $("#replyAddBtn").on("click", function () {
         var replyText = $("#newReplyText");
         var replyWriter = $("#newReplyWriter");
         var replyTextVal = replyText.val();
         var replyWriterVal = replyWriter.val();
-
         $.ajax({
-           type : "post",
-           url : "/replies",
-           headers : {
-               "Content-type" : "application/json",
-               "X-HTTP-Method-Override" : "POST"
-           },
-           dataType : "text",
-           data : JSON.stringify({
-              articleNo : articleNo,
-              replyText : replyTextVal,
-              replyWriter : replyWriterVal
-           }),
-           success : function (result) {
-               if (result == "regSuccess") {
-                   alert("댓글 등록 완료!");
-               }
-               getReplies(); // 댓글 목록 출력 함수 호출
-               replyText.val(""); // 댓글 내용 초기화
-               replyWriter.val(""); // 댓글 작성자 초기화
-           }
+            type : "post",
+            url : "/replies",
+            headers : {
+                "Content-type" : "application/json",
+                "X-HTTP-Method-Override" : "POST"
+            },
+            dataType : "text",
+            data : JSON.stringify({
+                articleNo : articleNo,
+                replyText : replyTextVal,
+                replyWriter : replyWriterVal
+            }),
+            success : function (result) {
+                if (result == "regSuccess") {
+                    alert("댓글 등록 완료!");
+                }
+                //getReplies();
+                getRepliesPaging(replyPageNum);
+                replyText.val("");
+                replyWriter.val("");
+            }
         });
     });
     $("#replies").on("click", ".replyLi button", function () {
         var reply = $(this).parent();
-
         var replyNo = reply.attr("data-replyNo");
         var replyText = reply.find(".replyText").text();
         var replyWriter = reply.find(".replyWriter").text();
-
         $("#replyNo").val(replyNo);
         $("#replyText").val(replyText);
         $("#replyWriter").val(replyWriter);
     });
-
     $(".modalDelBtn").on("click", function () {
-        // 댓글 번호
         var replyNo = $(this).parent().parent().find("#replyNo").val();
         $.ajax({
             type : "delete",
@@ -166,19 +157,15 @@
                 if (result == "delSuccess") {
                     alert("댓글 삭제 완료!");
                     $("#modifyModal").modal("hide");
-                    getReplies();
+                    //getReplies();
+                    getRepliesPaging(replyPageNum);
                 }
             }
         });
     });
-
     $(".modalModBtn").on("click", function () {
-
-        // 댓글 선택자
         var reply = $(this).parent().parent();
-        // 댓글 번호
         var replyNo = reply.find("#replyNo").val();
-        // 수정한 댓글 내용
         var replyText = reply.find("#replyText").val();
         $.ajax({
             type : "put",
@@ -196,9 +183,45 @@
                 if (result == "modSuccess") {
                     alert("댓글 수정 완료!");
                     $("#modifyModal").modal("hide");
-                    getReplies();
+                    //getReplies();
+                    getRepliesPaging(replyPageNum);
                 }
             }
         });
+    });
+    function getRepliesPaging(page) {
+        $.getJSON("/replies/" + articleNo + "/" + page, function (data) {
+            console.log(data);
+            var str = "";
+            $(data.replies).each(function () {
+                str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
+                    +  "<p class='replyText'>" + this.replyText + "</p>"
+                    +  "<p class='replyWriter'>" + this.replyWriter + "</p>"
+                    +  "<button type='button' class='btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal'>댓글 수정</button>"
+                    +  "</li>"
+                    +  "<hr/>";
+            });
+            $("#replies").html(str);
+            printPageNumbers(data.pageMaker);
+        });
+    }
+    function printPageNumbers(pageMaker) {
+        var str = "";
+        if (pageMaker.prev) {
+            str += "<li><a href='"+(pageMaker.startPage-1)+"'>이전</a></li>";
+        }
+        for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+            var strCalss = pageMaker.criteria.page == i ? 'class=active' : '';
+            str += "<li "+strCalss+"><a href='"+i+"'>"+i+"</a></li>";
+        }
+        if (pageMaker.next) {
+            str += "<li><a href='"+(pageMaker.endPage + 1)+"'>다음</a></li>";
+        }
+        $(".pagination-sm").html(str);
+    }
+    $(".pagination").on("click", "li a", function (event) {
+        event.preventDefault();
+        replyPageNum = $(this).attr("href");
+        getRepliesPaging(replyPageNum);
     });
 </script>
