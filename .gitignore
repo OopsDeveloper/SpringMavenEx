@@ -1,5 +1,2 @@
 # Project exclude paths
 /target/
-/SpringMavenEx.imltarget\
-target\
-/src/main/webapp/WEB-INF/classes/
