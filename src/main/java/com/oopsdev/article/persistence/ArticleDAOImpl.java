@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO{
@@ -69,6 +71,20 @@ public class ArticleDAOImpl implements ArticleDAO{
     @Override
     public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
         return sqlSession.selectOne(NAMESPACE + ".countSearchedArticles", searchCriteria);
+    }
+
+    @Override
+    public void updateReplyCnt(Integer articleNo, int amount) throws Exception {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("articleNo", articleNo);
+        paramMap.put("amount", amount);
+
+        sqlSession.update(NAMESPACE + ".updateReplyCnt", paramMap);
+    }
+
+    @Override
+    public void updateViewCnt(Integer articleNo) throws Exception {
+        sqlSession.update(NAMESPACE + ".updateViewCnt", articleNo);
     }
 
 }

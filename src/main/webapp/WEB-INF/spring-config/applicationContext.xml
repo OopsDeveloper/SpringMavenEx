@@ -37,6 +37,12 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven/>
+
     <!-- 빈 어노테이션 -->
     <context:component-scan base-package="com.oopsdev.*" />
     <!--<mybatis-spring:scan base-package="com.oopsdev.mapper.article" />-->

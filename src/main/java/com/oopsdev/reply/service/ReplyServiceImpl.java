@@ -29,7 +29,7 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public void addReply(ReplyVO replyVO) throws Exception {
         replyDAO.create(replyVO);
-        /*articleDAO.updateReplyCnt(replyVO.getArticleNo(), 1);*/
+        articleDAO.updateReplyCnt(replyVO.getArticleNo(), 1);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ReplyServiceImpl implements ReplyService{
     public void removeReply(Integer replyNo) throws Exception {
         int articleNo = replyDAO.getArticleNo(replyNo);
         replyDAO.delete(replyNo);
-        /*articleDAO.updateReplyCnt(articleNo, -1);*/
+        articleDAO.updateReplyCnt(articleNo, -1);
     }
 
     @Override

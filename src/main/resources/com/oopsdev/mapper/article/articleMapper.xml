@@ -10,6 +10,7 @@
         <result property="writer" column="writer"/>
         <result property="regDate" column="regdate"/>
         <result property="viewCnt" column="viewcnt"/>
+        <result property="replyCnt" column="reply_cnt"/>
     </resultMap>
 
     <insert id="create">
@@ -92,7 +93,8 @@
                 content,
                 writer,
                 regdate,
-                viewcnt
+                viewcnt,
+                reply_cnt
             FROM tbl_article
             WHERE article_no > 0
         ]]>
@@ -112,6 +114,18 @@
         ]]>
         <include refid="search"/>
     </select>
+
+    <update id="updateReplyCnt">
+        UPDATE tbl_article
+        SET reply_cnt = reply_cnt + #{amount}
+        WHERE article_no = #{articleNo}
+    </update>
+
+    <update id="updateViewCnt">
+        UPDATE tbl_article
+        SET viewcnt = viewcnt + 1
+        WHERE article_no = #{articleNo}
+    </update>
 
     <sql id="search">
         <if test="searchType != null">
