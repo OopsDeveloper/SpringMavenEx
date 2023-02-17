@@ -40,7 +40,14 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
+    <context:property-placeholder location="classpath:/config.properties" />
+    <!--<context:property-placeholder location="classpath:/${spring.profiles.active}.properties" />-->
+    <!--
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:/config.properties"/>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+    -->
     <tx:annotation-driven/>
 
     <!-- 빈 어노테이션 -->
