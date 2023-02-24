@@ -30,9 +30,9 @@ public class FileUtils {
     4. ServiceImpl
     -   @Override
         public void insertFile(HashMap<String, Object> map, MultipartFile[] files, String[] file_cd) throws Exception {
-            List<HashMap<String, Object>> fileList = fileUtils.uploadFiles(files, "");
             System.out.println(files.length);
             for(int i=0; i<files.length; i++) {
+                List<HashMap<String, Object>> fileList = fileUtils.uploadFiles(files, String.valueOf(i));
                 if (!CollectionUtils.isEmpty(fileList) && fileList.get(i).get("file_append_ori") != "") {
                     map.put("ori_file_name", fileList.get(i).get("file_append_ori"));
                     map.put("sav_file_name", fileList.get(i).get("file_append_sav"));
@@ -84,8 +84,14 @@ public class FileUtils {
     public List<HashMap<String,Object>> uploadFiles(MultipartFile[] files, String boardIdx) {
 
         /* 파일이 비어있으면 비어있는 리스트 반환 */
-        if (files[0].getSize() < 1) {
-            return Collections.emptyList();
+        if(boardIdx == "") {
+            if (files[0].getSize() < 1) {
+                return Collections.emptyList();
+            }
+        } else {
+            if(files[Integer.valueOf(boardIdx)].getSize() < 1) {
+                return Collections.emptyList();
+            }
         }
 
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
